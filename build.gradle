@@ -10,10 +10,9 @@ buildscript {
 	}
 }
 
-
-//plugins {
-//	id "com.github.node-gradle.node" version "5.0.0"
-//}
+plugins {
+	id "com.github.node-gradle.node" version "5.0.0"
+}
 
 apply plugin: 'java'
 compileJava {
@@ -28,20 +27,22 @@ group = 'com'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
-//task buildFront(type: YarnTask) {
-//	args = ['build']
-//}
+task buildFront(type: YarnTask) {
+	args = ['build']
+}
 
-//yarn_install.dependsOn(yarn_cache_clean)
-//buildFront.dependsOn(yarn_install)
+yarn_install.dependsOn(yarn_cache_clean)
+buildFront.dependsOn(yarn_install)
+processResources.dependsOn(buildFront)
+
 
 repositories {
 	mavenCentral()
 }
 
-//node {
-//	download = true
-//}
+node {
+	download = true
+}
 
 dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-web')
